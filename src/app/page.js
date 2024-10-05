@@ -296,7 +296,11 @@ export default function Home() {
             >
               {displayedTitle}
               <span
-                className={`${blinkVisible ? "inline-block" : "hidden"} ml-1`}
+                className="ml-1 text-blue-500 font-bold text-4xl"
+                style={{
+                  visibility: blinkVisible ? "visible" : "hidden",
+                  width: "0.5em",
+                }}
               >
                 |
               </span>

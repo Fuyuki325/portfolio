@@ -161,7 +161,7 @@ export default function Home() {
       title: "About Me",
       content: (
         <>
-          Hi, I’m Fuyuki! I’m a passionate Full Stack Developer with 4+ years of
+          Hi, I’m Fuyuki! I’m a passionate Frontend Developer with 4+ years of
           experience in building scalable web applications. I love coding,
           solving problems, and turning ideas into reality. My tech stack
           includes React, Node.js, AWS, and more.

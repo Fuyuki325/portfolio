@@ -79,7 +79,7 @@ const workExperience = [
 ];
 
 export default function Home() {
-  const titles = ["Programmer", "Software Engineer", "Frontend Developer"];
+  const titles = ["Software Engineer", "Programmer", "Frontend Developer"];
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
   const [displayedTitle, setDisplayedTitle] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);

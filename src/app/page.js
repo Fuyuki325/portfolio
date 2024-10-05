@@ -1,37 +1,8 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { FaReact, FaNodeJs } from "react-icons/fa";
-import { SiNextdotjs, SiTailwindcss, SiTypescript } from "react-icons/si";
-import { BiLogoTypescript } from "react-icons/bi";
-
-const skillsData = [
-  {
-    icon: <FaReact className="text-blue-500 text-4xl mb-2" />, // React icon
-    title: "React",
-    description: "Frontend framework for building dynamic UIs.",
-  },
-  {
-    icon: <FaNodeJs className="text-green-500 text-4xl mb-2" />, // Node.js icon
-    title: "Node.js",
-    description: "Backend JavaScript runtime environment.",
-  },
-  {
-    icon: <SiNextdotjs className="text-black text-4xl mb-2" />, // Next.js icon
-    title: "Next.js",
-    description: "Framework for building server-rendered React applications.",
-  },
-  {
-    icon: <SiTypescript className="text-blue-600 text-4xl mb-2" />, // TypeScript icon
-    title: "TypeScript",
-    description: "JavaScript with static type definitions.",
-  },
-  {
-    icon: <SiTailwindcss className="text-cyan-400 text-4xl mb-2" />, // TailwindCSS icon
-    title: "TailwindCSS",
-    description: "Utility-first CSS framework for rapid UI development.",
-  },
-];
+import SkillsSection from "@/components/SkillsSection";
+import Projects from "@/components/Projects";
 
 const workExperience = [
   {
@@ -193,70 +164,13 @@ export default function Home() {
     {
       title: "Skills",
       content: (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {/* Skill 1 */}
-          <div className="bg-gray-700 p-4 rounded-lg shadow-md">
-            <FaReact className="text-blue-500 text-4xl mb-2" />
-            <h3 className="text-xl font-semibold mb-2">React</h3>
-            <p>Frontend framework for building dynamic UIs.</p>
-          </div>
-
-          {/* Skill 2 */}
-          <div className="bg-gray-700 p-4 rounded-lg shadow-md">
-            <FaNodeJs className="text-green-500 text-4xl mb-2" />
-            <h3 className="text-xl font-semibold mb-2">Node.js</h3>
-            <p>Backend JavaScript runtime environment.</p>
-          </div>
-
-          {/* Skill 3 */}
-          <div className="bg-gray-700 p-4 rounded-lg shadow-md">
-            <SiNextdotjs className="text-black text-4xl mb-2" />
-            <h3 className="text-xl font-semibold mb-2">Next.js</h3>
-            <p>Framework for building server-rendered React applications.</p>
-          </div>
-
-          {/* Skill 4 */}
-          <div className="bg-gray-700 p-4 rounded-lg shadow-md">
-            <BiLogoTypescript className="text-blue-600 text-4xl mb-2" />
-            <h3 className="text-xl font-semibold mb-2">TypeScript</h3>
-            <p>JavaScript with static type definitions.</p>
-          </div>
-
-          {/* Skill 5 */}
-          <div className="bg-gray-700 p-4 rounded-lg shadow-md">
-            <SiTailwindcss className="text-cyan-400 text-4xl mb-2" />
-            <h3 className="text-xl font-semibold mb-2">TailwindCSS</h3>
-            <p>Utility-first CSS framework for rapid UI development.</p>
-          </div>
-        </div>
+        <SkillsSection />
       ),
     },
     {
       title: "Projects",
       content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-gray-700 p-4 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-2">Car Antitheft App</h3>
-            <p>
-              A mobile app that helps users secure their vehicles through
-              advanced tracking and alert features.
-            </p>
-            <a href="#" className="text-blue-400 hover:underline">
-              View Project
-            </a>
-          </div>
-          <div className="bg-gray-700 p-4 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-2">Portfolio Site</h3>
-            <p>
-              A personal website showcasing my skills, projects, and experiences
-              as a developer.
-            </p>
-            <a href="#" className="text-blue-400 hover:underline">
-              View Project
-            </a>
-          </div>
-          {/* Add more projects as needed */}
-        </div>
+        <Projects />
       ),
     },
     {

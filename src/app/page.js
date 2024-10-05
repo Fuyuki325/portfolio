@@ -1,101 +1,91 @@
-import Image from "next/image";
+"use client";
+import { useState, useEffect, useRef } from "react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const titles = ["Programmer", "Software Engineer", "Full Stack Developer"];
+  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
+  const [displayedTitle, setDisplayedTitle] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const typingSpeed = 150;
+  const pauseBetweenTitles = 1500;
+  const canvasRef = useRef(null); // Reference for the canvas
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    const handleTyping = () => {
+      const currentTitle = titles[currentTitleIndex];
+
+      if (isDeleting) {
+        setDisplayedTitle((prev) => currentTitle.substring(0, prev.length - 1));
+      } else {
+        setDisplayedTitle((prev) => currentTitle.substring(0, prev.length + 1));
+      }
+
+      if (!isDeleting && displayedTitle === currentTitle) {
+        setTimeout(() => setIsDeleting(true), pauseBetweenTitles);
+      } else if (isDeleting && displayedTitle === "") {
+        setIsDeleting(false);
+        setCurrentTitleIndex((prev) => (prev + 1) % titles.length);
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [displayedTitle, isDeleting, currentTitleIndex]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = "0123456789ABCDEF";
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(0); // Start each drop at 0
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; // Fading background
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#00ff00"; // Code color
+      ctx.font = `${fontSize}px monospace`;
+
+      drops.forEach((y, x) => {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, x * fontSize, y * fontSize);
+
+        if (y * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[x] = 0; // Reset drop position
+        } else {
+          drops[x]++; // Move drop down
+        }
+      });
+    }
+
+    const interval = setInterval(draw, 33); // Drawing every 33ms
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden">
+      {/* Canvas for code rain effect */}
+      <canvas ref={canvasRef} className="absolute inset-0 z-0"></canvas>
+
+      {/* Content */}
+      <div className="relative z-10">
+        <div className="w-full bg-gray-900 px-6 py-4 shadow-lg border-b border-gray-700">
+          <h1 className="text-3xl font-bold tracking-wider">Fuyuki&lsquo;s Portfolio</h1>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="flex items-center justify-center h-full">
+          <div className="font-mono bg-gray-700/70 w-[80%] h-[70%] rounded-lg shadow-2xl p-8 flex flex-col items-center justify-center backdrop-blur-lg">
+            <h1 className="text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
+              Fuyuki Malahom
+            </h1>
+            <p className="text-3xl font-light tracking-widest">{displayedTitle}</p>
+            <div className="w-full bg-gray-800 h-1 rounded-full mt-6"></div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

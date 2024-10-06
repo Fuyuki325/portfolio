@@ -184,9 +184,8 @@ const Projects = () => {
 
       {/* Portfolio Site */}
       <a
-        href="/#"
+        href="/portfolio/#"
         className="bg-gray-700 p-4 rounded-lg shadow-md transform transition-transform hover:scale-105 hover:bg-gray-600 cursor-pointer border border-transparent hover:border-blue-400"
-        target="_blank"
         rel="noopener noreferrer"
       >
         <Image

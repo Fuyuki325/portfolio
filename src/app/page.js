@@ -1,8 +1,10 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense, useMemo } from "react";
 import { motion } from "framer-motion";
-import SkillsSection from "@/components/SkillsSection";
-import Projects from "@/components/Projects";
+
+const SkillsSection = lazy(() => import("@/components/SkillsSection"));
+const Projects = lazy(() => import("@/components/Projects"));
+const Contact = lazy(() => import("@/components/Contact"));
 
 const workExperience = [
   {
@@ -59,6 +61,18 @@ export default function Home() {
   const pauseBetweenTitles = 1500;
   const canvasRef = useRef(null);
 
+  const contactRef = useRef(null); // Create a ref for the contact section
+
+  // Function to handle smooth scroll
+  const scrollToContact = () => {
+    if (contactRef.current) {
+      contactRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   useEffect(() => {
     const handleTyping = () => {
       const currentTitle = titles[currentTitleIndex];
@@ -101,7 +115,7 @@ export default function Home() {
     const drops = Array(columns).fill(0);
 
     function draw() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillStyle = "rgba(0, 0, 0, 0.02)"; // Reduced opacity for better performance
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#00ff00";
       ctx.font = `${fontSize}px monospace`;
@@ -118,7 +132,7 @@ export default function Home() {
       });
     }
 
-    const interval = setInterval(draw, 33);
+    const interval = setInterval(draw, 50); // Increased interval to reduce draw frequency
     return () => clearInterval(interval);
   }, []);
 
@@ -127,67 +141,68 @@ export default function Home() {
     visible: { opacity: 1, y: 0 },
   };
 
-  const sections = [
-    {
-      title: "About Me",
-      content: (
-        <>
-          Hi, I’m Fuyuki! I’m a passionate Frontend Developer with 4+ years of
-          experience in building scalable web applications. I love coding,
-          solving problems, and turning ideas into reality. My tech stack
-          includes React, Node.js, AWS, and more.
-        </>
-      ),
-    },
-    {
-      title: "Work Experience",
-      content: (
-        <div className="space-y-8">
-          {workExperience.map((job, index) => (
-            <div key={index} className="bg-gray-700 p-4 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold">
-                {job.title} @ {job.company}
-              </h3>
-              <p className="text-gray-300">{job.duration}</p>
-              <ul className="list-disc text-left pl-5 text-gray-200">
-                {" "}
-                {/* Adjusted classes */}
-                {job.responsibilities.map((resp, idx) => (
-                  <li key={idx}>{resp}</li>
-                ))}
-              </ul>
+  const sections = useMemo(
+    () => [
+      {
+        title: "About Me",
+        content: (
+          <>
+            Hi, I’m Fuyuki! I’m a passionate Frontend Developer with 4+ years of
+            experience in building scalable web applications. I love coding,
+            solving problems, and turning ideas into reality. My tech stack
+            includes React, Node.js, AWS, and more.
+          </>
+        ),
+      },
+      {
+        title: "Work Experience",
+        content: (
+          <div className="space-y-8">
+            {workExperience.map((job, index) => (
+              <div key={index} className="bg-gray-700 p-4 rounded-lg shadow-md">
+                <h3 className="text-xl font-semibold">
+                  {job.title} @ {job.company}
+                </h3>
+                <p className="text-gray-300">{job.duration}</p>
+                <ul className="list-disc text-left pl-5 text-gray-200">
+                  {job.responsibilities.map((resp, idx) => (
+                    <li key={idx}>{resp}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        ),
+      },
+      {
+        title: "Skills",
+        content: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <SkillsSection />
+          </Suspense>
+        ),
+      },
+      {
+        title: "Projects",
+        content: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Projects />
+          </Suspense>
+        ),
+      },
+      {
+        title: "Get In Touch",
+        content: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <div ref={contactRef}>
+              <Contact />
             </div>
-          ))}
-        </div>
-      ),
-    },
-    {
-      title: "Skills",
-      content: (
-        <SkillsSection />
-      ),
-    },
-    {
-      title: "Projects",
-      content: (
-        <Projects />
-      ),
-    },
-    {
-      title: "Get In Touch",
-      content: (
-        <>
-          Want to work with me? Reach out via email! <br />
-          <a
-            href="mailto:fuyuki325@gmail.com"
-            className="text-blue-400 hover:underline"
-          >
-            fuyuki325@gmail.com
-          </a>
-        </>
-      ),
-    },
-  ];
+          </Suspense>
+        ),
+      },
+    ],
+    []
+  );
 
   return (
     <div className="h-full bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden hide-scrollbar">
@@ -221,34 +236,37 @@ export default function Home() {
             </p>
           </div>
           <div className="flex justify-center pt-7">
-            <a
-              href="#contact"
+            <button
+              onClick={scrollToContact} // Call the smooth scroll function on click
               className="px-6 py-3 bg-blue-500 bg-opacity-90 text-white font-semibold rounded-lg shadow-lg transition-transform transform hover:scale-105 z-10 relative"
             >
               Get In Touch
-            </a>
+            </button>
           </div>
         </motion.div>
       </section>
       {sections.map((section, index) => (
-        <motion.section
+        <section
           key={index}
-          className={`relative z-10 py-20 px-10 ${
-            index % 2 === 0 ? "bg-gray-800" : "bg-gray-900"
-          }`}
-          initial="hidden"
-          whileInView="visible"
-          variants={fadeInUp}
-          transition={{ duration: 0.5, delay: index * 0.2 }}
+          className="py-16 px-4"
+          id={section.title.toLowerCase().replace(" ", "-")}
         >
-          <div className="container mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6">{section.title}</h2>
-            <div className="text-lg leading-relaxed">{section.content}</div>
-          </div>
-        </motion.section>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeInUp}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
+            className="max-w-3xl mx-auto"
+          >
+            <h2 className="text-4xl font-bold mb-4">{section.title}</h2>
+            <div className="text-lg">{section.content}</div>
+          </motion.div>
+        </section>
       ))}
-      <footer className="relative z-10 bg-gray-800 py-6 text-center text-gray-400">
-        <p>© 2024 Fuyuki Malahom. All rights reserved.</p>
+      <footer className="py-8 text-center bg-gray-700">
+        <p className="text-gray-300">
+          © 2024 Fuyuki Malahom. All rights reserved.
+        </p>
       </footer>
     </div>
   );

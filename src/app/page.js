@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef, lazy, Suspense, useMemo } from "react";
 import { motion } from "framer-motion";
+import { FaChevronDown } from "react-icons/fa6";
 
 const SkillsSection = lazy(() => import("@/components/SkillsSection"));
 const Projects = lazy(() => import("@/components/Projects"));
@@ -61,15 +62,17 @@ export default function Home() {
   const pauseBetweenTitles = 1500;
   const canvasRef = useRef(null);
 
-  const contactRef = useRef(null); // Create a ref for the contact section
+  const scrollRef = useRef(null); // Create a ref for the contact section
 
   // Function to handle smooth scroll
-  const scrollToContact = () => {
-    if (contactRef.current) {
-      contactRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+  const scrollToAbout = () => {
+    if (scrollRef.current) {
+      const yOffset = -140; // Adjust this value based on how much you want to offset
+      const y =
+        scrollRef.current.getBoundingClientRect().top +
+        window.pageYOffset +
+        yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
 
@@ -146,12 +149,12 @@ export default function Home() {
       {
         title: "About Me",
         content: (
-          <>
+          <div ref={scrollRef}>
             Hi, I’m Fuyuki! I’m a passionate Frontend Developer with 4+ years of
             experience in building scalable web applications. I love coding,
             solving problems, and turning ideas into reality. My tech stack
             includes React, Node.js, AWS, and more.
-          </>
+          </div>
         ),
       },
       {
@@ -194,9 +197,7 @@ export default function Home() {
         title: "Get In Touch",
         content: (
           <Suspense fallback={<div>Loading...</div>}>
-            <div ref={contactRef}>
-              <Contact />
-            </div>
+            <Contact />
           </Suspense>
         ),
       },
@@ -235,14 +236,17 @@ export default function Home() {
               </span>
             </p>
           </div>
-          <div className="flex justify-center pt-7">
-            <button
-              onClick={scrollToContact} // Call the smooth scroll function on click
-              className="px-6 py-3 bg-blue-500 bg-opacity-90 text-white font-semibold rounded-lg shadow-lg transition-transform transform hover:scale-105 z-10 relative"
-            >
-              Get In Touch
-            </button>
-          </div>
+          <div className="flex flex-col items-center pt-7">
+  <p className="text-lg text-white mb-2">Scroll down to learn more</p>
+  <button
+    onClick={scrollToAbout} // Call the smooth scroll function on click
+    className="px-6 py-3 bg-blue-500 bg-opacity-90 text-white font-semibold rounded-lg shadow-lg transition-transform transform hover:scale-105 z-10 relative flex items-center"
+  >
+    Scroll Down
+    <FaChevronDown className="ml-2 text-white text-2xl animate-bounce" />
+  </button>
+</div>
+
         </motion.div>
       </section>
       {sections.map((section, index) => (

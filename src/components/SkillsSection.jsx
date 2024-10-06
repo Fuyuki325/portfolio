@@ -1,4 +1,4 @@
-import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaJava } from "react-icons/fa";
+import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaJava, FaAws } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss, SiMysql, SiFirebase, SiD3Dotjs } from "react-icons/si";
 import { BiLogoTypescript } from "react-icons/bi";
 import { GrGraphQl } from "react-icons/gr";
@@ -59,6 +59,13 @@ const SkillsSection = () => (
       <FaJs className="text-yellow-500 text-4xl mb-2" />
       <h3 className="text-xl font-semibold mb-2">JavaScript</h3>
       <p>High-level, dynamic programming language for web development.</p>
+    </div>
+
+    {/* Skill 15: AWS */}
+    <div className="bg-gray-700 p-4 rounded-lg shadow-md">
+      <FaAws className="text-orange-400 text-4xl mb-2" /> {/* AWS icon */}
+      <h3 className="text-xl font-semibold mb-2">AWS</h3>
+      <p>Cloud platform offering a wide range of services for computing, storage, and deployment.</p>
     </div>
 
     {/* Skill 9 */}

@@ -95,6 +95,13 @@ const SkillsSection = () => (
       <h3 className="text-xl font-semibold mb-2">D3.js</h3>
       <p>JavaScript library for producing dynamic, interactive data visualizations in web browsers.</p>
     </div>
+
+    {/* Skill 14: React Native */}
+    <div className="bg-gray-700 p-4 rounded-lg shadow-md">
+      <FaReact className="text-blue-500 text-4xl mb-2" />
+      <h3 className="text-xl font-semibold mb-2">React Native</h3>
+      <p>Framework for building native mobile applications using React.</p>
+    </div>
   </div>
 );
 

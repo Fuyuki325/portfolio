@@ -1,6 +1,8 @@
 import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaJava } from "react-icons/fa";
-import { SiNextdotjs, SiTailwindcss, SiMysql, SiFirebase } from "react-icons/si";
+import { SiNextdotjs, SiTailwindcss, SiMysql, SiFirebase, SiD3Dotjs } from "react-icons/si";
 import { BiLogoTypescript } from "react-icons/bi";
+import { GrGraphQl } from "react-icons/gr";
+
 const SkillsSection = () => (
   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
     {/* Skill 1 */}
@@ -78,6 +80,20 @@ const SkillsSection = () => (
       <SiFirebase className="text-yellow-500 text-4xl mb-2" />
       <h3 className="text-xl font-semibold mb-2">Firebase</h3>
       <p>Platform for building mobile and web applications with real-time databases.</p>
+    </div>
+
+    {/* Skill 12: GraphQL */}
+    <div className="bg-gray-700 p-4 rounded-lg shadow-md">
+      <GrGraphQl className="text-pink-500 text-4xl mb-2" />
+      <h3 className="text-xl font-semibold mb-2">GraphQL</h3>
+      <p>Query language for APIs and a runtime for executing those queries.</p>
+    </div>
+
+    {/* Skill 13: D3.js */}
+    <div className="bg-gray-700 p-4 rounded-lg shadow-md">
+      <SiD3Dotjs className="text-orange-500 text-4xl mb-2" />
+      <h3 className="text-xl font-semibold mb-2">D3.js</h3>
+      <p>JavaScript library for producing dynamic, interactive data visualizations in web browsers.</p>
     </div>
   </div>
 );

@@ -22,10 +22,10 @@ const workExperience = [
   },
   {
     title: "Frontend Developer",
-    company: "AVOLTA, Inc.",
+    company: "Association for Computing Machinery.",
     duration: "May 2021 -- Feb 2023",
     responsibilities: [
-      "Developed intuitive and responsive interfaces for a new mobile application, enhancing user interaction and satisfaction by integrating modern design principles and performance optimizations.",
+      "Developed intuitive and responsive interfaces for a new web application, enhancing user interaction and satisfaction by integrating modern design principles and performance optimizations.",
       "Collaborated on the improvement and maintenance of application components, addressing bugs and optimizing functionality to deliver a seamless user experience.",
       "Contributed to the integration of various APIs and services, ensuring smooth data flow and functionality across the application’s features.",
     ],

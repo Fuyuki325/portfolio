@@ -9,6 +9,16 @@ const Contact = lazy(() => import("@/components/Contact"));
 
 const workExperience = [
   {
+    title: "Software Engineer for AI Training Data",
+    company: "Outlier",
+    duration: "Oct 2024 -- Present",
+    responsibilities: [
+      "Reviewed AI-generated code outputs to identify errors and ensure adherence to best practices, collaborating with engineers to refine training datasets and improve model performance.",
+      "Provided feedback on coding patterns and optimizations, contributing to both AI advancements and overall system accuracy.",
+      "Collaborated with cross-functional teams on code quality, leveraging this experience to further enhance frontend-related development work.",
+    ],
+  },
+  {
     title: "Lead Frontend Developer",
     company: "AVOLTA, Inc.",
     duration: "Mar 2023 -- Present",
@@ -30,27 +40,62 @@ const workExperience = [
       "Contributed to the integration of various APIs and services, ensuring smooth data flow and functionality across the application’s features.",
     ],
   },
+];
+
+const organizationalExperiences = [
+  {
+    title: "Lead Frontend Developer",
+    company: "RTools",
+    duration: "Mar 2023 -- Sep 2023",
+    responsibilities: [
+      "Led the development of RTools, a visual learning platform for computer science students focusing on data structures and algorithms.",
+      "Developed reusable frontend components, improving the scalability and maintainability of the web application.",
+      "Collaborated with designers to ensure that user interfaces were visually appealing and responsive across multiple devices.",
+      "Tested and optimized the performance of various frontend features, enhancing user interaction and satisfaction.",
+    ],
+  },
+  {
+    title: "Senior Frontend Developer",
+    company: "DesignVerse",
+    duration: "Jul 2022 -- Feb 2023",
+    responsibilities: [
+      "Created visually engaging web interfaces for a design-based application, improving user engagement.",
+      "Collaborated with UX/UI designers to enhance the user flow and improve the application’s overall usability.",
+      "Developed and optimized web components using modern JavaScript frameworks, reducing code complexity and enhancing maintainability.",
+    ],
+  },
   {
     title: "Frontend Developer",
-    company: "TechSolutions Inc.",
-    duration: "Apr 2020 -- Apr 2021",
+    company: "Rose Hack",
+    duration: "Jan 2022 -- Jun 2022",
     responsibilities: [
-      "Designed and implemented user-centric web interfaces, improving usability and visual appeal while ensuring responsiveness across devices.",
-      "Worked closely with cross-functional teams to enhance the functionality and performance of web applications, addressing user feedback and incorporating best practices.",
-      "Optimized front-end performance by refining code and leveraging modern development tools and techniques.",
+      "Led development workshops for participants, guiding them through web application development using HTML, CSS, and JavaScript.",
+      "Contributed to the design and implementation of the event's web application, ensuring smooth user experience and mobile responsiveness.",
+      "Worked with cross-functional teams to improve site functionality and optimize loading speeds, enhancing user engagement.",
+    ],
+  },
+  {
+    title: "Frontend Developer",
+    company: "Cutie Hack",
+    duration: "Jun 2021 -- Jun 2021",
+    responsibilities: [
+      "Designed intuitive and responsive web interfaces for a hackathon management platform, improving user satisfaction and ease of use.",
+      "Optimized front-end code to improve site performance and reduce loading times, ensuring a seamless user experience.",
+      "Collaborated with teams to resolve technical challenges and incorporate feedback, enhancing overall platform functionality.",
     ],
   },
   {
     title: "Junior Frontend Developer",
-    company: "WebWorks",
-    duration: "Jun 2019 -- Mar 2020",
+    company: "Engineers Without Borders",
+    duration: "Oct 2020 -- May 2021",
     responsibilities: [
-      "Assisted in the development of web applications, focusing on creating clean and efficient code to support various front-end functionalities.",
-      "Participated in the redesign of user interfaces, contributing to improved user experiences and overall application performance.",
-      "Collaborated with senior developers to troubleshoot issues and implement enhancements based on user feedback and testing results.",
+      "Designed and implemented multilingual web interfaces to increase accessibility for users globally, improving the overall reach and engagement of the platform.",
+      "Collaborated with backend engineers to integrate APIs and ensure data flow across all key components, enhancing site functionality and performance.",
+      "Enhanced user engagement by developing interactive features, improving the overall user experience and satisfaction.",
     ],
   },
 ];
+
 
 export default function Home() {
   const titles = ["Software Engineer", "Programmer", "Frontend Developer"];
@@ -178,6 +223,26 @@ export default function Home() {
         ),
       },
       {
+        title: "Organizational Experience",
+        content: (
+          <div className="space-y-8">
+            {organizationalExperiences.map((job, index) => (
+              <div key={index} className="bg-gray-700 p-4 rounded-lg shadow-md">
+                <h3 className="text-xl font-semibold">
+                  {job.title} @ {job.company}
+                </h3>
+                <p className="text-gray-300">{job.duration}</p>
+                <ul className="list-disc text-left pl-5 text-gray-200">
+                  {job.responsibilities.map((resp, idx) => (
+                    <li key={idx}>{resp}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        ),
+      },
+      {
         title: "Skills",
         content: (
           <Suspense fallback={<div>Loading...</div>}>
@@ -237,16 +302,15 @@ export default function Home() {
             </p>
           </div>
           <div className="flex flex-col items-center pt-7">
-  <p className="text-lg text-white mb-2">Scroll down to learn more</p>
-  <button
-    onClick={scrollToAbout} // Call the smooth scroll function on click
-    className="px-6 py-3 bg-blue-500 bg-opacity-90 text-white font-semibold rounded-lg shadow-lg transition-transform transform hover:scale-105 z-10 relative flex items-center"
-  >
-    Scroll Down
-    <FaChevronDown className="ml-2 text-white text-2xl animate-bounce" />
-  </button>
-</div>
-
+            <p className="text-lg text-white mb-2">Scroll down to learn more</p>
+            <button
+              onClick={scrollToAbout} // Call the smooth scroll function on click
+              className="px-6 py-3 bg-blue-500 bg-opacity-90 text-white font-semibold rounded-lg shadow-lg transition-transform transform hover:scale-105 z-10 relative flex items-center"
+            >
+              Scroll Down
+              <FaChevronDown className="ml-2 text-white text-2xl animate-bounce" />
+            </button>
+          </div>
         </motion.div>
       </section>
       {sections.map((section, index) => (

@@ -21,7 +21,7 @@ const workExperience = [
   {
     title: "Lead Frontend Developer",
     company: "AVOLTA, Inc.",
-    duration: "Mar 2023 -- Present",
+    duration: "Nov 2023 -- June 2024",
     responsibilities: [
       "Directed the creation of a sophisticated mobile application, optimizing user experience and performance through strategic architecture and cutting-edge technologies.",
       "Managed a team of engineers to address complex challenges and enhance overall project efficiency.",
@@ -33,7 +33,7 @@ const workExperience = [
   {
     title: "Frontend Developer",
     company: "Association for Computing Machinery.",
-    duration: "May 2021 -- Feb 2023",
+    duration: "May 2021 -- Oct 2023",
     responsibilities: [
       "Developed intuitive and responsive interfaces for a new web application, enhancing user interaction and satisfaction by integrating modern design principles and performance optimizations.",
       "Collaborated on the improvement and maintenance of application components, addressing bugs and optimizing functionality to deliver a seamless user experience.",
@@ -67,7 +67,7 @@ const organizationalExperiences = [
   {
     title: "Frontend Developer",
     company: "Rose Hack",
-    duration: "Jan 2022 -- Jun 2022",
+    duration: "Jan 2022 -- June 2022",
     responsibilities: [
       "Led development workshops for participants, guiding them through web application development using HTML, CSS, and JavaScript.",
       "Contributed to the design and implementation of the event's web application, ensuring smooth user experience and mobile responsiveness.",
@@ -77,7 +77,7 @@ const organizationalExperiences = [
   {
     title: "Frontend Developer",
     company: "Cutie Hack",
-    duration: "Jun 2021 -- Jun 2021",
+    duration: "Jun 2021 -- June 2021",
     responsibilities: [
       "Designed intuitive and responsive web interfaces for a hackathon management platform, improving user satisfaction and ease of use.",
       "Optimized front-end code to improve site performance and reduce loading times, ensuring a seamless user experience.",

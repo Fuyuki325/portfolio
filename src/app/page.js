@@ -9,7 +9,7 @@ const Contact = lazy(() => import("@/components/Contact"));
 
 const workExperience = [
   {
-    title: "Software Engineer for AI Training Data",
+    title: "Software Engineer",
     company: "Scale AI",
     duration: "Oct 2024 -- Present",
     responsibilities: [
